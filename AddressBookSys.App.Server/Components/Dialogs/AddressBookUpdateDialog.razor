@@ -1,0 +1,13 @@
+@implements IDialogContentComponent<DialogData<AddressBook>>
+
+<FluentLabel Typo="Typography.Body">ID: @(Content.Value!.Id)</FluentLabel>
+<FluentTextField @bind-Value="@Name">名前:</FluentTextField>
+<FluentTextField @bind-Value="@Mail">メールアドレス:</FluentTextField>
+
+@code {
+    public string? Name { get => Content.Value!.Name; set => Content.Value = Content.Value! with { Name = value ?? "" }; }
+    public string? Mail { get => Content.Value!.Mail; set => Content.Value = Content.Value! with { Mail = value ?? "" }; } 
+
+    [Parameter]
+    public DialogData<AddressBook> Content { get; set; } = default!;
+}

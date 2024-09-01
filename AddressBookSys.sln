@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Models", "AddressBookSys.Models\AddressBookSys.Models.csproj", "{4B115A2A-539F-4A8B-ACE5-228F2822F1CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Models.Tests", "AddressBookSys.Models.Tests\AddressBookSys.Models.Tests.csproj", "{79C0C119-8816-4E96-9927-82796DC76744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Console", "AddressBookSys.Console\AddressBookSys.Console.csproj", "{EF9105C7-EA82-4602-8746-DC3C36952B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.Server", "AddressBookSys.App.Server\AddressBookSys.App.Server.csproj", "{F5DEC1B1-2934-4742-A587-902510EDB87A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B115A2A-539F-4A8B-ACE5-228F2822F1CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B115A2A-539F-4A8B-ACE5-228F2822F1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B115A2A-539F-4A8B-ACE5-228F2822F1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B115A2A-539F-4A8B-ACE5-228F2822F1CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C0C119-8816-4E96-9927-82796DC76744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C0C119-8816-4E96-9927-82796DC76744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C0C119-8816-4E96-9927-82796DC76744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C0C119-8816-4E96-9927-82796DC76744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9105C7-EA82-4602-8746-DC3C36952B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9105C7-EA82-4602-8746-DC3C36952B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9105C7-EA82-4602-8746-DC3C36952B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9105C7-EA82-4602-8746-DC3C36952B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DEC1B1-2934-4742-A587-902510EDB87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DEC1B1-2934-4742-A587-902510EDB87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DEC1B1-2934-4742-A587-902510EDB87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DEC1B1-2934-4742-A587-902510EDB87A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
