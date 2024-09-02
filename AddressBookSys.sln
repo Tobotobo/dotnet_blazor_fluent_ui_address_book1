@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Models.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Console", "AddressBookSys.Console\AddressBookSys.Console.csproj", "{EF9105C7-EA82-4602-8746-DC3C36952B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.Server", "AddressBookSys.App.Server\AddressBookSys.App.Server.csproj", "{F5DEC1B1-2934-4742-A587-902510EDB87A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.Web", "AddressBookSys.App.Web\AddressBookSys.App.Web.csproj", "{F5DEC1B1-2934-4742-A587-902510EDB87A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Views", "AddressBookSys.Views\AddressBookSys.Views.csproj", "{9792CA20-0C1A-4CAC-BDFA-71D05E434D50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.WPF", "AddressBookSys.WPF\AddressBookSys.WPF.csproj", "{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.WPF", "AddressBookSys.App.WPF\AddressBookSys.App.WPF.csproj", "{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

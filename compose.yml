@@ -1,7 +1,7 @@
 services:
     dotnet:
         image: mcr.microsoft.com/dotnet/sdk:8.0
-        command: ["dotnet", "run", "--urls=http://0.0.0.0:5000", "--project", "AddressBookSys.App.Server"]
+        command: ["dotnet", "run", "--urls=http://0.0.0.0:5000", "--project", "AddressBookSys.App.Web"]
         working_dir: /src
         ports:
             - 5000:5000

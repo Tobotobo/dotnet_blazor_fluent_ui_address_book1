@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace AddressBookSys.WPF;
+namespace AddressBookSys.App.WPF;
 
 /// <summary>
 /// Interaction logic for App.xaml

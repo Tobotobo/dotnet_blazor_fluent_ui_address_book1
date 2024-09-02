@@ -17,7 +17,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
 
-    <RootNamespace>AddressBookSys.WPF</RootNamespace>
+    <RootNamespace>AddressBookSys.App.WPF</RootNamespace>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
