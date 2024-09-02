@@ -111,5 +111,3 @@ dotnet add AddressBookSys.App.WPF package Microsoft.EntityFrameworkCore
 ```
 dotnet run --project AddressBookSys.App.WPF
 ```
-TODO
-名前を WPF→App.WPF、Server→Web に変更

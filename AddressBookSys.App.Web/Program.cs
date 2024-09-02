@@ -1,5 +1,5 @@
 using AddressBookSys.Views;
-using AddressBookSys.Views.Components;
+using AddressBookSys.App.Web.Components;
 using AddressBookSys.Models.Entities;
 using AddressBookSys.Models.Repositories;
 using AddressBookSys.Models.Services;
@@ -81,6 +81,7 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies([typeof(AddressBookSys.Views.Components.Routes).Assembly]);
 
 app.Run();

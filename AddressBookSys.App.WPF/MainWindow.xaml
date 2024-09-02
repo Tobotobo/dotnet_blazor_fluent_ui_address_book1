@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AddressBookSys.App.WPF"
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
-        xmlns:rcl="clr-namespace:AddressBookSys.Views.Components;assembly=AddressBookSys.Views"
+        xmlns:views="clr-namespace:AddressBookSys.Views.Components;assembly=AddressBookSys.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot/index.html" Services="{DynamicResource services}">
             <blazor:BlazorWebView.RootComponents>
-                <blazor:RootComponent Selector="#app" ComponentType="{x:Type rcl:Routes}" />
-                <!-- <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:Counter}" /> -->
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type views:Routes}" />
             </blazor:BlazorWebView.RootComponents>
         </blazor:BlazorWebView>
     </Grid>
