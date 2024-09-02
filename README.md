@@ -42,3 +42,75 @@ dotnet ef migrations add InitialCreate --project AddressBookSys.Console
 dotnet run --project AddressBookSys.Console
 dotnet run --project AddressBookSys.App.Server
 ```
+
+View を分離
+```
+dotnet new razorclasslib -n AddressBookSys.Views
+dotnet sln add AddressBookSys.Views
+dotnet add AddressBookSys.Views reference AddressBookSys.Models
+dotnet add AddressBookSys.Views package Microsoft.FluentUI.AspNetCore.Components
+dotnet add AddressBookSys.Views package Microsoft.FluentUI.AspNetCore.Components.Icons
+dotnet add AddressBookSys.Views package Microsoft.Extensions.DependencyInjection
+
+dotnet add AddressBookSys.App.Server reference AddressBookSys.Views
+dotnet remove AddressBookSys.App.Server package Microsoft.FluentUI.AspNetCore.Components
+dotnet remove AddressBookSys.App.Server package Microsoft.FluentUI.AspNetCore.Components.Icons
+```
+* `AddressBookSys.Views.csproj` 以外削除
+* `AddressBookSys.App.Serve` から `Components` と `wwwroot` を移動
+* `AddressBookSys.Views\Components\_Imports.razor` で `App.Server` になっている箇所を `Views` に変更
+* `AddressBookSys.App.Server\Program.cs` で `App.Server` になっている箇所を `Views` に変更
+* `AddressBookSys.Views\Components\Dialogs\DialogData.cs` で `App.Server` になっている箇所を `Views` に変更
+* `AddressBookSys.Views\Components\Routes.razor` `Program` を `App` に変更
+* `AddressBookSys.Views\Components\App.razor` で `App.Server` になっている箇所を `Views` に変更
+* `AddressBookSys.Views\ServiceCollectionExtensions.cs` を作成
+  ```cs
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.FluentUI.AspNetCore.Components;
+
+    namespace AddressBookSys.Views;
+
+    public static class ServiceCollectionExtensions
+    {
+        public static IServiceCollection AddAddressBookSysViews(this IServiceCollection services)
+        {
+            services.AddFluentUIComponents();
+            return services;
+        }
+    }
+  ```
+* `AddressBookSys.App.Server\Program.cs` の `AddFluentUIComponents` を `AddAddressBookSysViews` に置き換え
+
+TODO
+```
+AddressBookSys.Views\Components\Pages\Error.razor(29,13): error CS0246: 型または名前空間の名前 'HttpContext' が見つか
+りませんでした (using ディレクテ
+ィブまたはアセンブリ参照が指定されていることを確認してください)
+```
+
+AddressBookSys.Views\Components\App.razor  
+* リンクを変更　→　`href="AddressBookSys.App.Server.styles.css"` だけ呼び出し元に依存してしまう　→　要対応
+```
+    <link rel="stylesheet" href="_content/AddressBookSys.Views/app.css" />
+    <link rel="stylesheet" href="AddressBookSys.App.Server.styles.css" />
+    <link rel="icon" type="image/x-icon" href="_content/AddressBookSys.Views/favicon.ico" />
+```
+
+
+```
+dotnet new wpf -n AddressBookSys.WPF
+dotnet sln add AddressBookSys.WPF
+dotnet add AddressBookSys.WPF reference AddressBookSys.Models
+dotnet add AddressBookSys.WPF reference AddressBookSys.Views
+dotnet add AddressBookSys.WPF package Microsoft.AspNetCore.Components.WebView.Wpf
+dotnet add AddressBookSys.WPF package Microsoft.EntityFrameworkCore
+```
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+<RootNamespace>AddressBookSys.WPF</RootNamespace>
+
+```
+dotnet run --project AddressBookSys.WPF
+```
+TODO
+名前を WPF　→　App.WPF に変更
+名前を Server → Web に変更

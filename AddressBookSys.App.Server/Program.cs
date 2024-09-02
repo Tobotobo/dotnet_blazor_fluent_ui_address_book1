@@ -1,5 +1,5 @@
-using Microsoft.FluentUI.AspNetCore.Components;
-using AddressBookSys.App.Server.Components;
+using AddressBookSys.Views;
+using AddressBookSys.Views.Components;
 using AddressBookSys.Models.Entities;
 using AddressBookSys.Models.Repositories;
 using AddressBookSys.Models.Services;
@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddFluentUIComponents();
+builder.Services.AddAddressBookSysViews();
 
 var connectionString = "DataSource=:memory:";
 using var connection = new SqliteConnection(connectionString);

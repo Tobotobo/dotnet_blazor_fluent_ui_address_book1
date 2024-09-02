@@ -8,11 +8,10 @@
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
-	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.*-* " />
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.*-* " />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AddressBookSys.Models\AddressBookSys.Models.csproj" />
+    <ProjectReference Include="..\AddressBookSys.Views\AddressBookSys.Views.csproj" />
   </ItemGroup>
 </Project>

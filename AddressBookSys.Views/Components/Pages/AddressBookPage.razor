@@ -1,0 +1,151 @@
+﻿@page "/addressbook"
+@rendermode InteractiveServer
+@inject IAddressBookService addressBookService
+@inject IDialogService dialogService
+@inject IToastService ToastService
+
+<PageTitle>アドレス帳</PageTitle>
+
+<h1>アドレス帳</h1>
+
+<FluentStack>
+    <FluentButton IconStart="@(new Icons.Regular.Size16.New())" Appearance="Appearance.Accent" @onclick="NewAddressBook">新規</FluentButton>
+    <FluentSpacer />
+    <FluentTextField Label="名前:" @bind-Value="NameFilter" />
+    <FluentTextField Label="メールアドレス:" @bind-Value="MailFilter" />
+    <FluentButton IconStart="@(new Icons.Regular.Size20.Search())" OnClick="@SearchAddressBooks" Appearance="Appearance.Accent">検索</FluentButton>
+    <FluentButton IconStart="@(new Icons.Regular.Size20.Eraser())" OnClick="@ClearFilter">クリア</FluentButton>
+</FluentStack>
+
+<FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Pagination="@pagination">
+    <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
+    <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
+    <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
+    <TemplateColumn Title="操作" Align="@Align.End">
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
+        <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
+    </TemplateColumn>
+</FluentDataGrid>
+
+<FluentPaginator State="@pagination" />
+
+@code {
+    private FluentDataGrid<AddressBook> addressBooksDataGrid = default!;
+    private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+    private GridItemsProvider<AddressBook> addressBooksProvider = default!;
+    public string? NameFilter { get; set; }
+    public string? MailFilter { get; set; }
+
+    protected override void OnInitialized()
+    {
+        addressBooksProvider = async req =>
+        {
+            var nameFilter = String.IsNullOrEmpty(NameFilter) ? null : NameFilter;
+            var mailFilter = String.IsNullOrEmpty(MailFilter) ? null : MailFilter;
+            var sortByIdAscending = req.SortByAscending;
+
+            var addressBooks = await addressBookService.GetAddressBooks(
+                nameFilter: nameFilter,
+                mailFilter: mailFilter,
+                skip: req.StartIndex, 
+                limit: req.Count ?? 0,
+                sortByIdAscending: sortByIdAscending);
+            return GridItemsProviderResult.From(
+                items: addressBooks.ToList(),
+                totalItemCount: await addressBookService.CountAddressBooks(
+                    nameFilter: nameFilter,
+                    mailFilter: mailFilter
+                ));
+        };
+    }
+
+    private async Task SearchAddressBooks() {
+        await addressBooksDataGrid.RefreshDataAsync();
+    }
+
+    private async Task ClearFilter() {
+        NameFilter = null;
+        MailFilter = null;
+        await SearchAddressBooks();
+    }
+
+    private async Task NewAddressBook() {
+        DialogParameters parameters = new()
+        {
+            Title = $"登録",
+            PrimaryAction = "登録",
+            SecondaryAction = "キャンセル",
+            Modal = true,
+            PreventDismissOnOverlayClick = true, // true = ダイアログの外側をクリックしても閉じない
+            TrapFocus = true, // true = ダイアログがフォーカスをトラップする（false にするとタブ移動でダイアログ外にまでフォーカスが移動する）
+            ShowDismiss = false, // false = ヘッダーの閉じるボタンを非表示
+            PreventScroll = true, // true = ダイアログの外側へのスクロールを防止
+        };
+        var dialog = await dialogService.ShowDialogAsync<AddressBookRegisterDialog>(new DialogData<AddressBook>(), parameters);
+        var result = await dialog.Result;
+        if (result.Cancelled)
+        {
+            return;
+        }
+        
+        var addressBook = (result.Data as DialogData<AddressBook>)!.Value!;
+        await addressBookService.AddAddressBook(addressBook);
+        await SearchAddressBooks();
+        ToastService.ShowToast(ToastIntent.Success, "登録しました", 3000);
+    }
+
+    private async Task UpdateAddressBook(AddressBook addressBook) {
+        DialogParameters parameters = new()
+        {
+            Title = $"更新",
+            PrimaryAction = "更新",
+            SecondaryAction = "キャンセル",
+            Modal = true,
+            PreventDismissOnOverlayClick = true, // true = ダイアログの外側をクリックしても閉じない
+            TrapFocus = true, // true = ダイアログがフォーカスをトラップする（false にするとタブ移動でダイアログ外にまでフォーカスが移動する）
+            ShowDismiss = false, // false = ヘッダーの閉じるボタンを非表示
+            PreventScroll = true, // true = ダイアログの外側へのスクロールを防止
+        };
+        var dialog = await dialogService.ShowDialogAsync<AddressBookUpdateDialog>(new DialogData<AddressBook>() { Value = addressBook }, parameters);
+        var result = await dialog.Result;
+        if (result.Cancelled)
+        {
+            return;
+        }
+        
+        var newAddressBook = (result.Data as DialogData<AddressBook>)!.Value!;
+        await addressBookService.UpdateAddressBook(newAddressBook);
+        await SearchAddressBooks();
+        ToastService.ShowToast(ToastIntent.Success, "更新しました", 3000);
+    }
+
+    private async Task RemoveAddressBook(AddressBook addressBook) {
+
+        var dialog = await dialogService.ShowMessageBoxAsync(new DialogParameters<MessageBoxContent>()
+           {
+                Content = new()
+                {
+                    Title = "削除",
+                    Message = $"{addressBook.Id} : {addressBook.Name} を削除します。よろしいですか？",
+                    Icon = new Icons.Regular.Size24.Warning(),
+                    IconColor = Color.Warning,
+                },
+                PrimaryAction = "はい",
+                SecondaryAction = "いいえ",
+                Modal = true, // ShowMessageBoxAsync だと効果が無い？
+                PreventDismissOnOverlayClick = true, // true = ダイアログの外側をクリックしても閉じない
+                TrapFocus = true, // true = ダイアログがフォーカスをトラップする（false にするとタブ移動でダイアログ外にまでフォーカスが移動する）
+                ShowDismiss = false, // false = ヘッダーの閉じるボタンを非表示
+                PreventScroll = true, // true = ダイアログの外側へのスクロールを防止
+            });
+        var result = await dialog.Result;
+        if (result.Cancelled)
+        {
+            return;
+        }
+
+        await addressBookService.RemoveAddressBook(addressBook);
+        await SearchAddressBooks();
+        ToastService.ShowToast(ToastIntent.Success, "削除しました", 3000);
+    }
+}
