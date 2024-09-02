@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="_content/AddressBookSys.Views/app.css" />
     <link rel="stylesheet" href="AddressBookSys.App.Web.styles.css" />
     <link rel="icon" type="image/x-icon" href="_content/AddressBookSys.Views/favicon.ico" />
+    @* <HeadOutlet @rendermode="@(new InteractiveServerRenderMode(prerender: false))"/> *@
     <HeadOutlet />
+    @* <HeadOutlet @rendermode="InteractiveServer"/> *@
 </head>
 
 <body>
-    <Routes />
+    @* <Routes @rendermode="@(new InteractiveServerRenderMode(prerender: false))"/>  *@
+    @* <Routes @rendermode="InteractiveServer"/> *@
+    <Routes/>
     <script src="_framework/blazor.web.js"></script>
 </body>
 

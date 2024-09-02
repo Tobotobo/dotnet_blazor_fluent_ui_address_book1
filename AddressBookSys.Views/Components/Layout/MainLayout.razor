@@ -2,12 +2,12 @@
 
 <FluentLayout>
     <FluentHeader>
-        AddressBookSys.App.Web
+        AddressBookSys
     </FluentHeader>
     <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
-        <NavMenu />
-        <FluentBodyContent Class="body-content">
-            <div class="content">
+        <NavMenu/>
+        <FluentBodyContent Class="body-content" >
+            <div class="content" >
                 @Body
             </div>
         </FluentBodyContent>
@@ -25,8 +25,8 @@
     <a class="dismiss">🗙</a>
 </div>
 
-<FluentToastProvider @rendermode="InteractiveServer"/>
-<FluentDialogProvider @rendermode="InteractiveServer"/>
-<FluentTooltipProvider @rendermode="InteractiveServer"/>
-<FluentMessageBarProvider @rendermode="InteractiveServer"/>
+<FluentToastProvider @rendermode="@Settings.RenderMode"/>
+<FluentDialogProvider @rendermode="@Settings.RenderMode"/>
+<FluentTooltipProvider @rendermode="@Settings.RenderMode"/>
+<FluentMessageBarProvider @rendermode="@Settings.RenderMode"/>
 @* <FluentMenuProvider /> *@

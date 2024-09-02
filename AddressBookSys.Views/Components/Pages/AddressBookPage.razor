@@ -1,5 +1,5 @@
 ﻿@page "/addressbook"
-@rendermode InteractiveServer
+@rendermode @(Settings.RenderMode)
 @inject IAddressBookService addressBookService
 @inject IDialogService dialogService
 @inject IToastService ToastService

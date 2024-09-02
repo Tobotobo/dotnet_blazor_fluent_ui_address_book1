@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using AddressBookSys.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;

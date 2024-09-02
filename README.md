@@ -111,3 +111,15 @@ dotnet add AddressBookSys.App.WPF package Microsoft.EntityFrameworkCore
 ```
 dotnet run --project AddressBookSys.App.WPF
 ```
+
+```
+dotnet new blazorwasm --pwa -n AddressBookSys.App.PWA
+dotnet sln add AddressBookSys.App.PWA
+dotnet add AddressBookSys.App.PWA reference AddressBookSys.Models
+dotnet add AddressBookSys.App.PWA reference AddressBookSys.Views
+dotnet add AddressBookSys.App.PWA package Microsoft.EntityFrameworkCore
+```
+
+```
+dotnet run --project AddressBookSys.App.PWA
+```

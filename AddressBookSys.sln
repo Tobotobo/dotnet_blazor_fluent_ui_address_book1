@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.Views", "Add
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.WPF", "AddressBookSys.App.WPF\AddressBookSys.App.WPF.csproj", "{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookSys.App.PWA", "AddressBookSys.App.PWA\AddressBookSys.App.PWA.csproj", "{BD9081D6-4CDC-465F-A6DE-85EAB64CBD05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCE71911-AB3F-4D5B-8F44-0ACAFD72DA7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD9081D6-4CDC-465F-A6DE-85EAB64CBD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD9081D6-4CDC-465F-A6DE-85EAB64CBD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD9081D6-4CDC-465F-A6DE-85EAB64CBD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD9081D6-4CDC-465F-A6DE-85EAB64CBD05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
