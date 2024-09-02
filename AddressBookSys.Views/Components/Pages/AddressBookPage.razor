@@ -12,7 +12,7 @@
     <FluentButton IconStart="@(new Icons.Regular.Size16.New())" Appearance="Appearance.Accent" @onclick="NewAddressBook">新規</FluentButton>
     <FluentSpacer />
     <FluentTextField Label="名前:" @bind-Value="NameFilter" />
-    <FluentTextField Label="メールアドレス:" @bind-Value="MailFilter" />
+    <FluentTextField Label="メールアドレス:" @bind-Value="MailFilter" TextFieldType="TextFieldType.Email" Spellcheck="true" />
     <FluentButton IconStart="@(new Icons.Regular.Size20.Search())" OnClick="@SearchAddressBooks" Appearance="Appearance.Accent">検索</FluentButton>
     <FluentButton IconStart="@(new Icons.Regular.Size20.Eraser())" OnClick="@ClearFilter">クリア</FluentButton>
 </FluentStack>

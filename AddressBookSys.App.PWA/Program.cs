@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using AddressBookSys.App.PWA;
 using AddressBookSys.Views;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using AddressBookSys.Models.Entities;
 using AddressBookSys.Models.Repositories;
 using AddressBookSys.Models.Services;
