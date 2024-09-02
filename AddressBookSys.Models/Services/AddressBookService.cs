@@ -7,8 +7,9 @@ namespace AddressBookSys.Models.Services;
 public class AddressBookService(IAddressBookRepository addressBookRepository) : IAddressBookService
 {
 
-    public Task<IImmutableList<AddressBook>> GetAddressBooks(string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null)
-        => addressBookRepository.GetAddressBooks(nameFilter, mailFilter, skip, limit);
+    public Task<IImmutableList<AddressBook>> GetAddressBooks(
+        string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null, bool sortByIdAscending = true)
+        => addressBookRepository.GetAddressBooks(nameFilter, mailFilter, skip, limit, sortByIdAscending);
 
     public Task<int> CountAddressBooks(string? nameFilter = null, string? mailFilter = null)
         => addressBookRepository.CountAddressBooks(nameFilter, mailFilter);

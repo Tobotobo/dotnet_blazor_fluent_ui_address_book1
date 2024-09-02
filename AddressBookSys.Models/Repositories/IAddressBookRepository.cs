@@ -5,7 +5,7 @@ namespace AddressBookSys.Models.Repositories;
 
 public interface IAddressBookRepository
 {
-    Task<IImmutableList<AddressBook>> GetAddressBooks(string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null);
+    Task<IImmutableList<AddressBook>> GetAddressBooks(string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null, bool sortByIdAscending = true);
 
     Task<AddressBook> AddAddressBook(AddressBook addressBook);
 

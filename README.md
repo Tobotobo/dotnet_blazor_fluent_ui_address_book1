@@ -2,6 +2,8 @@
 
 ## 試行錯誤中...
 
+![alt text](images/README/image.png)
+
 ```
 dotnet new gitignore
 dotnet new sln -n AddressBookSys

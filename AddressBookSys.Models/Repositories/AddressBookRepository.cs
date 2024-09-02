@@ -13,16 +13,26 @@ public class AddressBookRepository(AddressBookContext context) : IAddressBookRep
         await context.Database.EnsureCreatedAsync();
     }
 
-    public async Task<IImmutableList<AddressBook>> GetAddressBooks(string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null)
+    public async Task<IImmutableList<AddressBook>> GetAddressBooks(
+        string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null, bool sortByIdAscending = true)
     {
         var query = context.AddressBooks.AsQueryable();
-        if (!string.IsNullOrEmpty(nameFilter)) {
+        if (!string.IsNullOrEmpty(nameFilter))
+        {
             query = query.Where(x => x.Name.Contains(nameFilter));
         }
-        if (!string.IsNullOrEmpty(mailFilter)) {
+        if (!string.IsNullOrEmpty(mailFilter))
+        {
             query = query.Where(x => x.Mail.Contains(mailFilter));
         }
-        query = query.OrderBy(x => x.Id);
+        if (sortByIdAscending)
+        {
+            query = query.OrderBy(x => x.Id);
+        }
+        else
+        {
+            query = query.OrderByDescending(x => x.Id);
+        }
         if (skip != null)
         {
             query = query.Skip((int)skip);
@@ -37,10 +47,12 @@ public class AddressBookRepository(AddressBookContext context) : IAddressBookRep
     public async Task<int> CountAddressBooks(string? nameFilter = null, string? mailFilter = null)
     {
         var query = context.AddressBooks.AsQueryable();
-        if (!string.IsNullOrEmpty(nameFilter)) {
+        if (!string.IsNullOrEmpty(nameFilter))
+        {
             query = query.Where(x => x.Name.Contains(nameFilter));
         }
-        if (!string.IsNullOrEmpty(mailFilter)) {
+        if (!string.IsNullOrEmpty(mailFilter))
+        {
             query = query.Where(x => x.Mail.Contains(mailFilter));
         }
         return await query.CountAsync();
