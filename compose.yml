@@ -1,0 +1,11 @@
+services:
+    dotnet:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        command: ["dotnet", "run", "--urls=http://0.0.0.0:5000", "--project", "AddressBookSys.App.Server"]
+        working_dir: /src
+        ports:
+            - 5000:5000
+        volumes:
+            - ./:/src
+        tty: true
+        restart: unless-stopped
