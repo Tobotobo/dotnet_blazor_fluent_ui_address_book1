@@ -166,6 +166,9 @@ dotnet add AddressBookSys.App.WPF package DotNetEnv
 チュートリアル: ASP.NET Core で Web API を作成する  
 https://learn.microsoft.com/ja-jp/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio-code  
 
+Dapr を使ってみる - 入門編  
+https://qiita.com/takashiuesaka/items/bdae30de41b0daab881f  
+
 ```
 dotnet new webapi --use-controllers -n AddressBookSys.App.WebAPI
 dotnet sln add AddressBookSys.App.WebAPI

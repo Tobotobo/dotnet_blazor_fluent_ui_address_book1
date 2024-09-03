@@ -11,6 +11,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORSポリシーを追加
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5289") // Blazor PWAのURLを指定
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseSqlite(connection))
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
@@ -19,6 +31,9 @@ builder.Services
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();
+
+// CORSをミドルウェアに適用
+app.UseCors("AllowSpecificOrigin");
 
 using (var scope = app.Services.CreateScope())
 {

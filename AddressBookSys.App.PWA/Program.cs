@@ -23,10 +23,12 @@ var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_Connec
 // connection.Open();
 
 builder.Services
+    .AddHttpClient()
     // .AddDbContext<AddressBookContext>(x => x.UseSqlite(connection))
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
     // .AddSingleton<IAddressBookRepository, AddressBookRepository>()
-    .AddSingleton<IAddressBookRepository, AddressBookRepositoryMoc>()
+    // .AddSingleton<IAddressBookRepository, AddressBookRepositoryMoc>()
+    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>()
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();

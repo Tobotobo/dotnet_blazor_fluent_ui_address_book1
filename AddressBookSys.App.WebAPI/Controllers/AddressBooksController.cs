@@ -34,7 +34,7 @@ public class AddressBooksController(ILogger<AddressBooksController> logger, IAdd
     )
     {
         var count = await addressBookService.CountAddressBooks(nameFilter, mailFilter);
-        return Ok(new[] { count });
+        return Ok(count);
     }
 
     // 1件取得
@@ -46,7 +46,7 @@ public class AddressBooksController(ILogger<AddressBooksController> logger, IAdd
         {
             return NotFound();
         }
-        return Ok(new[] { addressBook });
+        return Ok(addressBook);
     }
 
     // 追加

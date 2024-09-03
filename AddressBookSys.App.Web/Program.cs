@@ -21,11 +21,12 @@ var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_Connec
 // using var connection = new SqliteConnection(connectionString);
 // connection.Open();
 builder.Services
+    .AddHttpClient()
     // .AddDbContext<AddressBookContext>(x => x.UseSqlite(connection))
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString))
-    .AddTransient(_ => new AddressBookContext(x => x.UseNpgsql(connectionString)))
-    .AddTransient<AddressBookContextFactory>()
-    .AddTransient<IAddressBookRepository, AddressBookRepository>()
+    // .AddTransient(_ => new AddressBookContext(x => x.UseNpgsql(connectionString)))
+    // .AddTransient<AddressBookContextFactory>()
+    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>()
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();
