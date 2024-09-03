@@ -135,3 +135,27 @@ dotnet publish -r win-x64 --self-contained AddressBookSys.App.WPF -o publish/Add
 * BlazorWebView の内部エラーの確認方法が不明（無言で落ちたりする）
 * WPF で AddDbContext で追加すると当該コンテキストにアクセスが発生する操作のタイミングでアプリが無言で落ちる
 * PWA の実行時に Models の sqlite のネイティブファイルに対する警告が表示される。また動作もしない。
+
+## EFCore + PostgreSQL
+
+```
+dotnet add AddressBookSys.App.Web package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add AddressBookSys.App.Web package DotNetEnv
+```
+
+```
+dotnet add AddressBookSys.App.PWA package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add AddressBookSys.App.PWA package DotNetEnv
+```
+
+PWA で Npgsql が使えず　→　WebAPI化を検討
+```
+Microsoft.AspNetCore.Components.WebAssembly.Rendering.WebAssemblyRenderer[100]
+      Unhandled exception rendering component: System.Net.NameResolution is not supported on this platform.
+System.PlatformNotSupportedException: System.Net.NameResolution is not supported on this platform.
+```
+
+```
+dotnet add AddressBookSys.App.WPF package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add AddressBookSys.App.WPF package DotNetEnv
+```

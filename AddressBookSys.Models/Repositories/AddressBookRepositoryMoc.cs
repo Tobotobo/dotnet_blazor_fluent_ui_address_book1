@@ -50,6 +50,15 @@ public class AddressBookRepositoryMoc : IAddressBookRepository
         });
     }
 
+    public Task<AddressBook?> GetAddressBook(int id) {
+        return Task.Run(() => {
+            lock(addressBooksLock) {
+                var existingEntity = addressBooks.FirstOrDefault(x => x!.Id == id, null);
+                return existingEntity;
+            }
+        });
+    }
+
     public Task<int> CountAddressBooks(string? nameFilter = null, string? mailFilter = null)
     {
         return Task.Run(() => {

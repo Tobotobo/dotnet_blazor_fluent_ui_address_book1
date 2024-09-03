@@ -11,6 +11,9 @@ public class AddressBookService(IAddressBookRepository addressBookRepository) : 
         string? nameFilter = null, string? mailFilter = null, int? skip = null, int? limit = null, bool sortByIdAscending = true)
         => addressBookRepository.GetAddressBooks(nameFilter, mailFilter, skip, limit, sortByIdAscending);
 
+    public Task<AddressBook?> GetAddressBook(int id)
+        => addressBookRepository.GetAddressBook(id);
+
     public Task<int> CountAddressBooks(string? nameFilter = null, string? mailFilter = null)
         => addressBookRepository.CountAddressBooks(nameFilter, mailFilter);
 
