@@ -50,3 +50,34 @@
 // Console.WriteLine("- 削除 ------------");
 // await addressBookService.RemoveAddressBook(2);
 // await dump();
+
+using System.Net;
+using System.Web;
+
+static string GetUriWithQueryParameters(string baseUrl, IDictionary<string, object?> parameters)
+{
+    var uriBuilder = new UriBuilder(baseUrl);
+    var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+
+    foreach (var param in parameters)
+    {
+        if (param.Value != null)
+        {
+            query[param.Key] = param.Value.ToString();
+        }
+    }
+
+    uriBuilder.Query = query.ToString();
+    return uriBuilder.ToString();
+}
+
+var baseUrl = "https://api.example.com/data";
+var parameters = new Dictionary<string, object?>
+{
+    { "skip", 10 },
+    { "limit", 20 },
+    { "search", "example" }
+};
+
+var fullUrl = GetUriWithQueryParameters(baseUrl, parameters);
+        Console.WriteLine(fullUrl);
