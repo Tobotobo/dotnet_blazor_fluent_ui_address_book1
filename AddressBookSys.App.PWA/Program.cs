@@ -25,7 +25,7 @@ var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_Connec
 builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseSqlite(connection))
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
-    .AddSingleton<IAddressBookRepository, AddressBookRepository>()
+    // .AddSingleton<IAddressBookRepository, AddressBookRepository>()
     .AddSingleton<IAddressBookRepository, AddressBookRepositoryMoc>()
     .AddTransient<IAddressBookService, AddressBookService>();
 

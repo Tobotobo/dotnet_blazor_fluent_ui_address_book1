@@ -159,3 +159,25 @@ System.PlatformNotSupportedException: System.Net.NameResolution is not supported
 dotnet add AddressBookSys.App.WPF package Npgsql.EntityFrameworkCore.PostgreSQL
 dotnet add AddressBookSys.App.WPF package DotNetEnv
 ```
+
+
+## WebAPI
+
+チュートリアル: ASP.NET Core で Web API を作成する  
+https://learn.microsoft.com/ja-jp/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio-code  
+
+```
+dotnet new webapi --use-controllers -n AddressBookSys.App.WebAPI
+dotnet sln add AddressBookSys.App.WebAPI
+dotnet add AddressBookSys.App.WebAPI reference AddressBookSys.Models
+dotnet add AddressBookSys.App.WebAPI package Microsoft.EntityFrameworkCore
+dotnet add AddressBookSys.App.WebAPI package Npgsql.EntityFrameworkCore.PostgreSQL
+```
+
+```
+dotnet run --project AddressBookSys.App.WebAPI
+```
+http://localhost:5285/swagger/index.html
+http://localhost:5285/weatherforecast
+http://localhost:5285/addressbooks
+http://localhost:5285/addressbooks/1
