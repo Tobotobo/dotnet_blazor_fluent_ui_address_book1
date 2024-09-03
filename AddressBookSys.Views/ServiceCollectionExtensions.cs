@@ -6,13 +6,14 @@ namespace AddressBookSys.Views;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAddressBookSysViews(this IServiceCollection services, bool wasm = false, bool prerender = true)
+    public static IServiceCollection AddAddressBookSysViews(this IServiceCollection services, RenderMode renderMode, bool prerender = true)
     {
-        if (wasm) {
-            Settings.RenderMode = new InteractiveWebAssemblyRenderMode(prerender);
-        } else {
-            Settings.RenderMode = new InteractiveServerRenderMode(prerender);
-        }
+        Settings.RenderMode = renderMode switch {
+            RenderMode.Server => new InteractiveServerRenderMode(prerender),
+            RenderMode.WebAssembly => new InteractiveWebAssemblyRenderMode(prerender),
+            RenderMode.WebView => null,
+            _ => throw new ArgumentOutOfRangeException(nameof(renderMode), $"Not expected renderMode value: {renderMode}"),
+        };
         services.AddFluentUIComponents();
         return services;
     }

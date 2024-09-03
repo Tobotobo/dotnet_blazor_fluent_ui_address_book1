@@ -104,6 +104,7 @@ dotnet add AddressBookSys.App.WPF reference AddressBookSys.Models
 dotnet add AddressBookSys.App.WPF reference AddressBookSys.Views
 dotnet add AddressBookSys.App.WPF package Microsoft.AspNetCore.Components.WebView.Wpf
 dotnet add AddressBookSys.App.WPF package Microsoft.EntityFrameworkCore
+dotnet add AddressBookSys.App.WPF package Microsoft.Extensions.Logging.Debug
 ```
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 <RootNamespace>AddressBookSys.App.WPF</RootNamespace>
@@ -121,5 +122,16 @@ dotnet add AddressBookSys.App.PWA package Microsoft.EntityFrameworkCore
 ```
 
 ```
+dotnet run --project AddressBookSys.App.Web
 dotnet run --project AddressBookSys.App.PWA
+dotnet run --project AddressBookSys.App.WPF
 ```
+
+```
+dotnet publish -r win-x64 --self-contained AddressBookSys.App.WPF -o publish/AddressBookSys.App.WPF
+```
+
+## TODO
+* BlazorWebView の内部エラーの確認方法が不明（無言で落ちたりする）
+* WPF で AddDbContext で追加すると当該コンテキストにアクセスが発生する操作のタイミングでアプリが無言で落ちる
+* PWA の実行時に Models の sqlite のネイティブファイルに対する警告が表示される。また動作もしない。

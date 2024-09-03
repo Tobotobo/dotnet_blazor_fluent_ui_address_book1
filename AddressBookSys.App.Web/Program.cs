@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddAddressBookSysViews(wasm: false, prerender: true);
+builder.Services.AddAddressBookSysViews(RenderMode.Server, prerender: true);
 
 var connectionString = "DataSource=:memory:";
 using var connection = new SqliteConnection(connectionString);
