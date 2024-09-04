@@ -6,7 +6,7 @@
 
 <PageTitle>アドレス帳</PageTitle>
 
-<h1>アドレス帳</h1>
+<h1>アドレス帳aaa</h1>
 
 <FluentStack>
     <FluentButton IconStart="@(new Icons.Regular.Size16.New())" Appearance="Appearance.Accent" @onclick="NewAddressBook">新規</FluentButton>
@@ -17,7 +17,8 @@
     <FluentButton IconStart="@(new Icons.Regular.Size20.Eraser())" OnClick="@ClearFilter">クリア</FluentButton>
 </FluentStack>
 
-<FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Pagination="@pagination">
+@* ページネーション *@
+@* <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Pagination="@pagination">
     <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
     <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
     <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
@@ -27,7 +28,26 @@
     </TemplateColumn>
 </FluentDataGrid>
 
-<FluentPaginator State="@pagination" />
+<FluentPaginator State="@pagination" /> *@
+
+@* 無限スクロール *@
+@* <div style="flex-grow: 1; overflow:auto;" tabindex="-1"> *@
+<div style="height: 300px;">
+@* <FluentStack Orientation="Orientation.Vertical"> *@
+    <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Virtualize="true" GenerateHeader="GenerateHeaderOption.Sticky" ItemSize="48">
+        <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
+        <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
+        <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
+        <TemplateColumn Title="操作" Align="@Align.End">
+            <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
+        </TemplateColumn>
+    </FluentDataGrid>
+@* </FluentStack> *@
+</div>
+
+aaa
+
 
 @code {
     private FluentDataGrid<AddressBook> addressBooksDataGrid = default!;
