@@ -18,13 +18,28 @@ public class AddressBooksController(ILogger<AddressBooksController> logger, IAdd
         [FromQuery] bool sortByIdAscending = true
     )
     {
-        return Ok(await addressBookService.GetAddressBooks(
-            nameFilter: nameFilter,
-            mailFilter: mailFilter,
-            skip: skip,
-            limit: limit,
-            sortByIdAscending: sortByIdAscending
-        ));
+        logger.LogInformation("Get method called with parameters: nameFilter={NameFilter}, mailFilter={MailFilter}, skip={Skip}, limit={Limit}, sortByIdAscending={SortByIdAscending}", 
+            nameFilter, mailFilter, skip, limit, sortByIdAscending);
+
+        try
+        {
+            var result = await addressBookService.GetAddressBooks(
+                nameFilter: nameFilter,
+                mailFilter: mailFilter,
+                skip: skip,
+                limit: limit,
+                sortByIdAscending: sortByIdAscending
+            );
+
+            logger.LogInformation("Get method successfully retrieved {Count} address books.", result.Count());
+
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while retrieving address books.");
+            return StatusCode(500, "Internal server error");
+        }
     }
 
     [HttpGet("Count")]

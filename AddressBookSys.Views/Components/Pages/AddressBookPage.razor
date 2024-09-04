@@ -6,63 +6,78 @@
 
 <PageTitle>アドレス帳</PageTitle>
 
-<h1>アドレス帳aaa</h1>
+<div style="display: flex; flex-direction: column; height: 100%;">
 
-<FluentStack>
-    <FluentButton IconStart="@(new Icons.Regular.Size16.New())" Appearance="Appearance.Accent" @onclick="NewAddressBook">新規</FluentButton>
-    <FluentSpacer />
-    <FluentTextField Label="名前:" @bind-Value="NameFilter" />
-    <FluentTextField Label="メールアドレス:" @bind-Value="MailFilter" TextFieldType="TextFieldType.Email" Spellcheck="true" />
-    <FluentButton IconStart="@(new Icons.Regular.Size20.Search())" OnClick="@SearchAddressBooks" Appearance="Appearance.Accent">検索</FluentButton>
-    <FluentButton IconStart="@(new Icons.Regular.Size20.Eraser())" OnClick="@ClearFilter">クリア</FluentButton>
-</FluentStack>
+    @* 上部※高さ固定 *@
+    <div style="flex: 0 1 auto;">
+        <h1>アドレス帳</h1>
 
-@* ページネーション *@
-@* <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Pagination="@pagination">
-    <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
-    <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
-    <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
-    <TemplateColumn Title="操作" Align="@Align.End">
-        <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
-        <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
-    </TemplateColumn>
-</FluentDataGrid>
+        <FluentStack>
+            @* 新規 *@
+            <FluentButton IconStart="@(new Icons.Regular.Size16.New())" Appearance="Appearance.Accent" @onclick="NewAddressBook">新規</FluentButton>
+            <FluentSpacer />
+            @* 検索 *@
+            <FluentTextField Label="名前:" @bind-Value="NameFilter" />
+            <FluentTextField Label="メールアドレス:" @bind-Value="MailFilter" TextFieldType="TextFieldType.Email" Spellcheck="true" />
+            <FluentButton IconStart="@(new Icons.Regular.Size20.Search())" OnClick="@SearchAddressBooks" Appearance="Appearance.Accent">検索</FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size20.Eraser())" OnClick="@ClearFilter">クリア</FluentButton>
+        </FluentStack>
+    </div>
 
-<FluentPaginator State="@pagination" /> *@
+    <div style="flex: 1 1 auto; overflow: auto;">
 
-@* 無限スクロール *@
-@* <div style="flex-grow: 1; overflow:auto;" tabindex="-1"> *@
-<div style="height: 300px;">
-@* <FluentStack Orientation="Orientation.Vertical"> *@
-    <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Virtualize="true" GenerateHeader="GenerateHeaderOption.Sticky" ItemSize="48">
-        <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
-        <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
-        <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
-        <TemplateColumn Title="操作" Align="@Align.End">
-            <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
-            <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
-        </TemplateColumn>
-    </FluentDataGrid>
-@* </FluentStack> *@
+        @* ページネーション *@
+        @* <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Pagination="@pagination">
+            <PropertyColumn Title="ID" Property="@(x => x.Id)" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
+            <PropertyColumn Title="名前" Property="@(x => x.Name)" Align="Align.Start"/>
+            <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Align="Align.Start"/>
+            <TemplateColumn Title="操作" Align="@Align.End">
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
+            </TemplateColumn>
+        </FluentDataGrid>
+        <FluentPaginator State="@pagination" /> *@
+
+        @* 無限スクロール *@
+        <FluentDataGrid @ref="addressBooksDataGrid" ItemsProvider="@addressBooksProvider" Virtualize="true" GenerateHeader="GenerateHeaderOption.Sticky" ItemSize="48">
+            <PropertyColumn Title="ID" Property="@(x => x.Id)" Width="0.5fr" InitialSortDirection="SortDirection.Ascending" IsDefaultSortColumn=true Sortable="true" Align="Align.Start"/>
+            <PropertyColumn Title="名前" Property="@(x => x.Name)" Width="1fr" Align="Align.Start"/>
+            <PropertyColumn Title="メールアドレス" Property="@(x => x.Mail)" Width="2fr" Align="Align.Start"/>
+            <TemplateColumn Title="操作" Align="@Align.End">
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => UpdateAddressBook(context))">変更</FluentButton>
+                <FluentButton IconStart="@(new Icons.Regular.Size16.Delete())" OnClick="@(() => RemoveAddressBook(context))">削除</FluentButton>
+            </TemplateColumn>
+        </FluentDataGrid>
+    </div>
+
+    @* 下部※高さ固定 *@
+    <div style="flex: 0 1 auto;">
+        <FluentLabel style="padding-top: 0.5rem"><b>@Count</b> items</FluentLabel>
+    </div>
+
 </div>
-
-aaa
-
 
 @code {
     private FluentDataGrid<AddressBook> addressBooksDataGrid = default!;
     private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
     private GridItemsProvider<AddressBook> addressBooksProvider = default!;
-    public string? NameFilter { get; set; }
-    public string? MailFilter { get; set; }
+    private string? NameFilter { get; set; }
+    private string? MailFilter { get; set; }
 
-    protected override void OnInitialized()
+    private int Count { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
         addressBooksProvider = async req =>
         {
             var nameFilter = String.IsNullOrEmpty(NameFilter) ? null : NameFilter;
             var mailFilter = String.IsNullOrEmpty(MailFilter) ? null : MailFilter;
             var sortByIdAscending = req.SortByAscending;
+
+            Count = await addressBookService.CountAddressBooks(
+                nameFilter: nameFilter,
+                mailFilter: mailFilter
+            );
 
             var addressBooks = await addressBookService.GetAddressBooks(
                 nameFilter: nameFilter,
@@ -72,11 +87,10 @@ aaa
                 sortByIdAscending: sortByIdAscending);
             return GridItemsProviderResult.From(
                 items: addressBooks.ToList(),
-                totalItemCount: await addressBookService.CountAddressBooks(
-                    nameFilter: nameFilter,
-                    mailFilter: mailFilter
-                ));
+                totalItemCount: Count);
         };
+
+        Count = await addressBookService.CountAddressBooks();
     }
 
     private async Task SearchAddressBooks() {
