@@ -14,6 +14,15 @@ builder.Services.AddSwaggerGen();
 // CORSポリシーを追加
 builder.Services.AddCors(options =>
 {
+    // 検証用※本番利用不可！
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
         {
@@ -33,7 +42,8 @@ builder.Services
 var app = builder.Build();
 
 // CORSをミドルウェアに適用
-app.UseCors("AllowSpecificOrigin");
+// app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowAll"); // 検証用※本番利用不可！
 
 using (var scope = app.Services.CreateScope())
 {

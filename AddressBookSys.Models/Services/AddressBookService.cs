@@ -4,6 +4,7 @@ using AddressBookSys.Models.Repositories;
 
 namespace AddressBookSys.Models.Services;
 
+// TODO: WebAPI と App 用でクラスを分ける ※今は処理が無いからよいが処理が追加されたら二重で実行される
 public class AddressBookService(IAddressBookRepository addressBookRepository) : IAddressBookService
 {
 

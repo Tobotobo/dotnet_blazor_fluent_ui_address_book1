@@ -1,13 +1,10 @@
 using AddressBookSys.Views;
-using AddressBookSys.App.Web.Components;
 using AddressBookSys.Models.Entities;
 using AddressBookSys.Models.Repositories;
 using AddressBookSys.Models.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using DotNetEnv;
-
-Env.Load();
+using AddressBookSys.App.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +13,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddAddressBookSysViews(RenderMode.Server, prerender: true);
 
-var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
+// var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
 // var connectionString = "DataSource=:memory:";
 // using var connection = new SqliteConnection(connectionString);
 // connection.Open();
@@ -26,7 +23,10 @@ builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString))
     // .AddTransient(_ => new AddressBookContext(x => x.UseNpgsql(connectionString)))
     // .AddTransient<AddressBookContextFactory>()
-    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>()
+    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
+        httpClient: services.GetRequiredService<HttpClient>(),
+        baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
+    ))
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();

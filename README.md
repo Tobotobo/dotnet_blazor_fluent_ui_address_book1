@@ -184,3 +184,30 @@ http://localhost:5285/swagger/index.html
 http://localhost:5285/weatherforecast
 http://localhost:5285/addressbooks
 http://localhost:5285/addressbooks/1
+
+ASP.NET Core Blazor configuration  
+https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/configuration?view=aspnetcore-8.0  
+
+```
+dotnet remove AddressBookSys.App.Web package DotNetEnv
+dotnet remove AddressBookSys.App.WPF package DotNetEnv
+dotnet remove AddressBookSys.App.PWA package DotNetEnv
+```
+
+WPF デスクトップ アプリを .NET 8 にアップグレードする方法  
+https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/migration/?view=netdesktop-8.0  
+
+WPF でも appsettings.json を読み込むようにする
+
+※ WPF のプロジェクトの SDK を Microsoft.NET.Sdk.Razor にしてるため以下は不要
+
+```
+dotnet add AddressBookSys.App.WPF package Microsoft.Extensions.Configuration.Json
+```
+```
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+```

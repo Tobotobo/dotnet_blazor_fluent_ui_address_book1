@@ -1,13 +1,14 @@
 using AddressBookSys.Models.Entities;
+using Microsoft.Extensions.Options;
 using System.Collections.Immutable;
 using System.Net.Http.Json;
 using System.Web;
 
 namespace AddressBookSys.Models.Repositories;
 
-public class AddressBookRepositoryWebAPI(HttpClient httpClient) : IAddressBookRepository
+public class AddressBookRepositoryWebAPI(HttpClient httpClient, string baseUrl) : IAddressBookRepository
 {
-    private readonly Uri _baseUri = new Uri("http://localhost:5285/AddressBooks/");
+    private readonly Uri _baseUri = GetUri(new(baseUrl), "AddressBooks");
 
     static string GetUriWithQueryParameters(Uri baseUri, Dictionary<string, object?> parameters)
         => GetUriWithQueryParameters(baseUri.ToString(), parameters);
@@ -29,14 +30,32 @@ public class AddressBookRepositoryWebAPI(HttpClient httpClient) : IAddressBookRe
         return uriBuilder.ToString();
     }
 
-    static string GetUrl(Uri baseUri, params object[] relativeUris) {
-        var uri = baseUri;
-        foreach(var relativeUri in relativeUris) {
-            uri = new Uri(uri, relativeUri.ToString());
-        }
-        return uri.ToString();
-    }
+    static Uri GetUri(Uri baseUri, params object[] relativeUris) => new(GetUrl(baseUri, relativeUris));
 
+    static string GetUrl(Uri baseUri, params object[] relativeUris)
+    {
+        var uri = baseUri.ToString();
+
+        foreach (var relativeUri in relativeUris)
+        {
+            var relativeUriStr = relativeUri.ToString();
+            if (relativeUriStr is null) continue;
+
+            if (!uri.EndsWith('/'))
+            {
+                uri += "/";
+            }
+
+            if (relativeUriStr.StartsWith('/'))
+            {
+                relativeUriStr = relativeUriStr.TrimStart('/');
+            }
+
+            uri = new Uri(new Uri(uri), relativeUriStr).ToString();
+        }
+
+        return uri;
+    }
 
     public async Task DatabaseEnsureCreated()
     {
@@ -60,10 +79,16 @@ public class AddressBookRepositoryWebAPI(HttpClient httpClient) : IAddressBookRe
 
     public async Task<AddressBook?> GetAddressBook(int id) {
         var url = GetUrl(_baseUri, id);
-        // TODO: 存在しない id だと null ではなく落ちる
-        // System.Net.Http.HttpRequestException: Response status code does not indicate success: 404 (Not Found).
-        var addressBook = await httpClient.GetFromJsonAsync<AddressBook>(url);
-        return addressBook;
+        try
+        {
+            var addressBook = await httpClient.GetFromJsonAsync<AddressBook>(url);
+            return addressBook;
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            // 404 Not Found の場合は null を返す
+            return null;
+        }
     }
 
     public async Task<int> CountAddressBooks(string? nameFilter = null, string? mailFilter = null)

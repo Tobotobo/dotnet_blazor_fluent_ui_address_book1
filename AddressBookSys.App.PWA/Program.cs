@@ -5,10 +5,8 @@ using AddressBookSys.Views;
 using AddressBookSys.Models.Entities;
 using AddressBookSys.Models.Repositories;
 using AddressBookSys.Models.Services;
-using DotNetEnv;
-using Microsoft.EntityFrameworkCore;
-
-Env.Load();
+using AddressBookSys.Models;
+using Microsoft.Extensions.Options;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -17,7 +15,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddAddressBookSysViews(AddressBookSys.Views.RenderMode.WebAssembly, prerender: true);
 
-var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
+// var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
 // var connectionString = "DataSource=:memory:";
 // using var connection = new SqliteConnection(connectionString);
 // connection.Open();
@@ -28,7 +26,10 @@ builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
     // .AddSingleton<IAddressBookRepository, AddressBookRepository>()
     // .AddSingleton<IAddressBookRepository, AddressBookRepositoryMoc>()
-    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>()
+    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
+        httpClient: services.GetRequiredService<HttpClient>(),
+        baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
+    ))
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();
