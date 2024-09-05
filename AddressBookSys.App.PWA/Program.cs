@@ -25,11 +25,11 @@ builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseSqlite(connection))
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
     // .AddSingleton<IAddressBookRepository, AddressBookRepository>()
-    // .AddSingleton<IAddressBookRepository, AddressBookRepositoryMoc>()
-    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
-        httpClient: services.GetRequiredService<HttpClient>(),
-        baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
-    ))
+    .AddSingleton<IAddressBookRepository>(_ => new AddressBookRepositoryMoc(includeDummyData: true))
+    // .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
+    //     httpClient: services.GetRequiredService<HttpClient>(),
+    //     baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
+    // ))
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();

@@ -129,6 +129,7 @@ dotnet run --project AddressBookSys.App.WPF
 
 ```
 dotnet publish -r win-x64 --self-contained AddressBookSys.App.WPF -o publish/AddressBookSys.App.WPF
+dotnet publish AddressBookSys.App.PWA -o publish/AddressBookSys.App.PWA
 ```
 
 ## TODO
