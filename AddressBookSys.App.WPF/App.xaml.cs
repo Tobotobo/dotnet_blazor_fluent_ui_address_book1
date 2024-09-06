@@ -45,7 +45,7 @@ public partial class App : Application
             });
     		serviceCollection.AddBlazorWebViewDeveloperTools();
 #endif
-        serviceCollection.AddAddressBookSysViews(RenderMode.WebView);
+        serviceCollection.AddAddressBookSysViews(AppType.WPF, RenderMode.WebView);
 
         serviceCollection
             .AddHttpClient()

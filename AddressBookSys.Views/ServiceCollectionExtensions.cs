@@ -6,8 +6,9 @@ namespace AddressBookSys.Views;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAddressBookSysViews(this IServiceCollection services, RenderMode renderMode, bool prerender = true)
+    public static IServiceCollection AddAddressBookSysViews(this IServiceCollection services, AppType appType, RenderMode renderMode, bool prerender = true)
     {
+        Settings.AppType = appType;
         Settings.RenderMode = renderMode switch {
             RenderMode.Server => new InteractiveServerRenderMode(prerender),
             RenderMode.WebAssembly => new InteractiveWebAssemblyRenderMode(prerender),

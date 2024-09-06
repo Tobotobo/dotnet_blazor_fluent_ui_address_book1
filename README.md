@@ -217,3 +217,24 @@ dotnet add AddressBookSys.App.WPF package Microsoft.Extensions.Configuration.Jso
 
 Blazor WebAssembly オフライン対応 PWA をリロードしても更新できないのはなぜか?  
 https://qiita.com/jsakamoto/items/39c434aecab5b771f824  
+
+## iOS ダブルタップでの拡大を防ぐ
+
+https://zenn.dev/kiki_her/articles/0f3e86ba83df08  
+
+(備忘録)今日つまづいたスマホレイアウトのあれこれ
+https://qiita.com/TechN/items/05dccbb2e504280c43f2  
+
+
+↓なぜか効果なし
+```
+touch-action: manipulation !important;
+```
+
+↓以下は効果あり
+metaタグのviewportにmaximum-scale=1.0を挿入する
+```
+ <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+ </head>
+```

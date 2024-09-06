@@ -13,7 +13,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddAddressBookSysViews(AddressBookSys.Views.RenderMode.WebAssembly, prerender: true);
+builder.Services.AddAddressBookSysViews(AppType.PWA, AddressBookSys.Views.RenderMode.WebAssembly, prerender: true);
 
 // var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
 // var connectionString = "DataSource=:memory:";

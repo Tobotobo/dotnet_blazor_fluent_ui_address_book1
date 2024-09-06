@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddAddressBookSysViews(RenderMode.Server, prerender: true);
+builder.Services.AddAddressBookSysViews(AppType.Web, RenderMode.Server, prerender: true);
 
 // var connectionString = Environment.GetEnvironmentVariable("AddressBookSys_ConnectionString");
 // var connectionString = "DataSource=:memory:";
@@ -23,10 +23,11 @@ builder.Services
     // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString))
     // .AddTransient(_ => new AddressBookContext(x => x.UseNpgsql(connectionString)))
     // .AddTransient<AddressBookContextFactory>()
-    .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
-        httpClient: services.GetRequiredService<HttpClient>(),
-        baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
-    ))
+    // .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
+    //     httpClient: services.GetRequiredService<HttpClient>(),
+    //     baseUrl: builder.Configuration["AddressBookSys:WebApiBaseUrl"]!
+    // ))
+    .AddSingleton<IAddressBookRepository>(_ => new AddressBookRepositoryMoc(includeDummyData: true))
     .AddTransient<IAddressBookService, AddressBookService>();
 
 var app = builder.Build();

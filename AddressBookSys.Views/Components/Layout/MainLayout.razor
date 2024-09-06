@@ -1,5 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
+@if (Settings.AppType == AppType.PWA) {
+    <PwaUpdateNotifier />
+}
+
 <FluentLayout>
     <FluentHeader>
         AddressBookSys
