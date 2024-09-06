@@ -212,3 +212,8 @@ dotnet add AddressBookSys.App.WPF package Microsoft.Extensions.Configuration.Jso
     </Content>
   </ItemGroup>
 ```
+
+## PWA 更新
+
+Blazor WebAssembly オフライン対応 PWA をリロードしても更新できないのはなぜか?  
+https://qiita.com/jsakamoto/items/39c434aecab5b771f824  

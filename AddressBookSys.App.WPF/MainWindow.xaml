@@ -7,7 +7,8 @@
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
         xmlns:views="clr-namespace:AddressBookSys.Views.Components;assembly=AddressBookSys.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
+        Title="アドレス帳" Height="800" Width="1200"
+        Icon="アドレス帳アイコン_48.ico">
     <Grid>
         <blazor:BlazorWebView HostPage="wwwroot/index.html" Services="{DynamicResource services}">
             <blazor:BlazorWebView.RootComponents>

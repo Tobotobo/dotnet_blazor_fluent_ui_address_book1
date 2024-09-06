@@ -36,6 +36,98 @@
                 "${workspaceFolder}/AddressBookSys.sln"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run PWA",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.PWA"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch PWA",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.PWA"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run Web",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.Web"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch Web",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.Web"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run WebAPI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.WebAPI"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch WebAPI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.WebAPI"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run WPF",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.WPF"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch WPF",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/AddressBookSys.App.WPF"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

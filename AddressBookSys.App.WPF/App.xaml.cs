@@ -55,10 +55,11 @@ public partial class App : Application
             // .AddDbContext<AddressBookContext>(x => x.UseNpgsql(connectionString), ServiceLifetime.Singleton, ServiceLifetime.Singleton)
             // .AddTransient(_ => new AddressBookContext(x => x.UseNpgsql(connectionString)))
             // .AddTransient<AddressBookContextFactory>()
-            .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
-                httpClient: services.GetRequiredService<HttpClient>(),
-                baseUrl: _config["AddressBookSys:WebApiBaseUrl"]!
-            ))
+            // .AddTransient<IAddressBookRepository, AddressBookRepositoryWebAPI>(services => new AddressBookRepositoryWebAPI(
+            //     httpClient: services.GetRequiredService<HttpClient>(),
+            //     baseUrl: _config["AddressBookSys:WebApiBaseUrl"]!
+            // ))
+            .AddSingleton<IAddressBookRepository>(_ => new AddressBookRepositoryMoc(includeDummyData: true))
             .AddTransient<IAddressBookService, AddressBookService>();
 
         _services = serviceCollection.BuildServiceProvider();

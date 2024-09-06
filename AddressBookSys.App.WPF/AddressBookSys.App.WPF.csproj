@@ -29,4 +29,8 @@
     </Content>
   </ItemGroup> -->
 
+  <ItemGroup>
+      <Resource Include="アドレス帳アイコン_48.ico" />
+  </ItemGroup>
+
 </Project>
