@@ -1,11 +1,11 @@
 {
-  "name": "AddressBookSys.App.PWA",
-  "short_name": "AddressBookSys.App.PWA",
+  "name": "アドレス帳",
+  "short_name": "アドレス帳",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "theme_color": "#000000",
   "prefer_related_applications": false,
   "icons": [
     {
