@@ -238,3 +238,16 @@ metaタグのviewportにmaximum-scale=1.0を挿入する
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
  </head>
 ```
+
+## MAUI
+
+```
+dotnet new maui-blazor -n AddressBookSys.App.MAUI
+dotnet sln add AddressBookSys.App.MAUI
+dotnet add AddressBookSys.App.MAUI reference AddressBookSys.Models
+dotnet add AddressBookSys.App.MAUI reference AddressBookSys.Views
+```
+
+```
+dotnet build -t:Run -f net8.0-maccatalyst AddressBookSys.App.MAUI
+```
