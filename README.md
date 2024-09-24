@@ -251,3 +251,15 @@ dotnet add AddressBookSys.App.MAUI reference AddressBookSys.Views
 ```
 dotnet build -t:Run -f net8.0-maccatalyst AddressBookSys.App.MAUI
 ```
+
+```
+dotnet publish \
+  -f net8.0-ios \
+  -c Release \
+  -p:ArchiveOnBuild=true \
+  -p:RuntimeIdentifier=ios-arm64 \
+  -p:ApplicationId="com.github.Tobotobo.MyNewApp" \
+  -p:CodesignKey="Apple Development: tobotobo.channel@gmail.com (VV73GU3XM9)" \
+  -p:CodesignProvision="iOS Team Provisioning Profile: com.github.Tobotobo.MyNewApp" \
+  AddressBookSys.App.MAUI
+```
